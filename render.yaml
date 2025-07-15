@@ -1,6 +1,7 @@
 services:
   - type: web
     name: laravel-app
+
     env: php
     buildCommand: |
       composer install --no-dev --optimize-autoloader
@@ -29,29 +30,35 @@ services:
         value: your_db4free_password
 
     name: laravel-booking
+
     env: php
-    plan: free
     buildCommand: |
-      composer install --no-dev
-      php artisan key:generate
-      php artisan migrate --force
+      composer install --no-dev --optimize-autoloader
       npm install && npm run build
-    startCommand: php artisan serve --host 0.0.0.0 --port $PORT
+    startCommand: php artisan serve --host=0.0.0.0 --port=10000
     envVars:
       - key: APP_ENV
         value: production
+      - key: APP_DEBUG
+        value: false
       - key: APP_KEY
-        sync: false
+        value: base64:your-generated-key-here
+      - key: APP_URL
+        value: https://your-app-name.onrender.com
       - key: DB_CONNECTION
         value: mysql
       - key: DB_HOST
-        value: <your-db-host>
+        value: db4free.net
       - key: DB_PORT
         value: 3306
       - key: DB_DATABASE
-        value: <your-db-name>
+        value: laravel2
       - key: DB_USERNAME
-        value: <your-db-user>
+        value: your_db4free_user
       - key: DB_PASSWORD
+
         value: <your-db-pass>
+
+
+        value: your_db4free_password
 
