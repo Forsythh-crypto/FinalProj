@@ -11,7 +11,7 @@
             <h3 class="text-lg font-semibold mb-6">Admin Panel</h3>
             <ul class="space-y-4">
                 <li>
-                    <a href="{{ route('bookings.index') }}" class="block p-3 hover:bg-indigo-700 rounded">Manage Bookings</a>
+                    <a href="{{ route('mybookings.index') }}" class="block p-3 hover:bg-indigo-700 rounded">Manage Bookings</a>
                 </li>
                 <li>
                     <a href="{{ route('users.index') }}" class="block p-3 hover:bg-indigo-700 rounded">Show All Users</a>
@@ -92,7 +92,7 @@
                         }
                     }).then(result => {
                         if (result.isConfirmed && result.value) {
-                            fetch("{{ route('bookings.store') }}", {
+                            fetch("{{ route('mybookings.store') }}", {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",
@@ -137,7 +137,7 @@
                     {
                         title: '{{ $booking->title }}',
                         start: '{{ $booking->date }}T{{ $booking->time }}',
-                        url: '{{ route('bookings.edit', $booking) }}'
+                        url: '{{ route('mybookings.edit', $booking) }}'
                     },
                     @endforeach
                 ]

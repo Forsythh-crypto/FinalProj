@@ -28,10 +28,10 @@
                         <td class="p-3 capitalize">{{ $booking->status }}</td>
                         <td class="p-3 flex gap-2">
                             {{-- Edit Button --}}
-                            <a href="{{ route('bookings.edit', $booking) }}" class="text-blue-600 hover:underline">Edit</a>
+                            <a href="{{ route('mybookings.edit', $booking) }}" class="text-blue-600 hover:underline">Edit</a>
 
                             {{-- Delete Form --}}
-                            <form action="{{ route('bookings.destroy', $booking) }}" method="POST" onsubmit="return confirm('Delete this booking?')" class="inline">
+                            <form action="{{ route('mybookings.destroy', $booking) }}" method="POST" onsubmit="return confirm('Delete this booking?')" class="inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-600 hover:underline">Delete</button>

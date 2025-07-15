@@ -6,6 +6,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Gate;
 use App\Models\Booking;
 use App\Policies\BookingPolicy;
+use App\Policies\UserPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,9 +15,10 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @var array<class-string, class-string>
      */
-    protected $policies = [
-        Booking::class => BookingPolicy::class,
+   protected $policies = [
+    \App\Models\User::class => \App\Policies\UserPolicy::class,
     ];
+
 
     /**
      * Bootstrap any authentication / authorization services.

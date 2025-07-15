@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="max-w-3xl mx-auto mt-10 bg-white p-6 rounded shadow">
-        <form method="POST" action="{{ route('bookings.update', $booking) }}">
+        <form method="POST" action="{{ route('mybookings.update', $booking) }}">
             @csrf
             @method('PUT')
 
@@ -73,7 +73,7 @@
         </form>
 
         <!-- Delete Button -->
-        <form action="{{ route('bookings.destroy', $booking) }}" method="POST" class="mt-4 text-center">
+        <form action="{{ route('mybookings.destroy', $booking) }}" method="POST" class="mt-4 text-center">
             @csrf
             @method('DELETE')
             <button type="submit"
