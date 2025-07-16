@@ -118,15 +118,24 @@
                                 }
                                 return res.json();
                             })
-                            .then(data => {
-                                Swal.fire("Success", "Booking created successfully!", "success");
-
-                                calendar.addEvent({
-                                    title: data.booking.title,
-                                    start: `${data.booking.date}T${data.booking.time}`,
-                                    url: `/bookings/${data.booking.id}/edit`
+                           .then(data => {
+                                Swal.fire({
+                                    title: "Success",
+                                    text: "Booking created successfully!",
+                                    icon: "success",
+                                    confirmButtonText: "OK"
+                                }).then(result => {
+                                    if (result.isConfirmed) {
+                                        location.reload();
+                                    }
                                 });
-                            })
+
+    calendar.addEvent({
+        title: data.booking.title,
+        start: `${data.booking.date}T${data.booking.time}`,
+        url: `/bookings/${data.booking.id}/edit`
+    });
+})
                             .catch(err => {
                                 console.error(err);
                                 Swal.fire("Error", err.message || "Something went wrong", "error");
