@@ -6,33 +6,41 @@
     <title>Welcome to Booking System</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-100 font-sans antialiased text-gray-800"> <!-- Set body background color -->
+<body class="bg-gray-900 font-sans antialiased text-gray-100">
 
-    <div class="min-h-screen flex items-center justify-center px-4 bg-gradient-to-r from-green-500 to-blue-300"> <!-- Set background gradient for the page -->
-        <div class="w-full max-w-2xl bg-white shadow-[0_8px_30px_rgba(0,0,0,0.25)] rounded-lg p-8 text-center">
-            <h1 class="text-3xl font-bold mb-4 text-blue-700">Welcome to the Booking System</h1>
-            <p class="text-gray-600 mb-6">Plan, schedule, and manage your bookings with ease.</p>
+    <div class="min-h-screen flex items-center justify-center px-4 bg-slate-900">
+        <div class="w-full max-w-xl bg-gray-800 shadow-[0_10px_40px_rgba(0,0,0,0.4)] rounded-xl p-8 text-center transition-all duration-500">
 
+            <!-- Header -->
+            <h1 class="text-3xl font-extrabold text-blue-300 mb-4">
+                Welcome to Booking System
+            </h1>
+            <p class="text-gray-300 text-base mb-6">
+                Plan, schedule, and manage your bookings with ease.
+            </p>
+
+            <!-- CTA Buttons -->
             <div class="flex justify-center gap-4">
                 @auth
                     <a href="{{ route('dashboard') }}"
-                       class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition">
+                       class="bg-blue-800 hover:bg-blue-900 text-white font-semibold py-2 px-6 rounded-lg shadow hover:scale-105 transition">
                         Go to Dashboard
                     </a>
                 @else
                     <a href="{{ route('login') }}"
-                       class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition">
+                       class="bg-green-900 hover:bg-green-800 text-white font-semibold py-2 px-6 rounded-lg shadow transition hover:scale-105">
                         Login
                     </a>
                     <a href="{{ route('register') }}"
-                       class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded border transition">
+                       class="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-6 rounded-lg border border-gray-500 transition hover:scale-105">
                         Register
                     </a>
                 @endauth
             </div>
 
-            <div class="mt-10 text-sm text-gray-400">
-                &copy; {{ now()->year }} Booking System. All rights reserved.
+            <!-- Footer -->
+            <div class="mt-10 text-sm text-gray-500">
+                &copy; {{ now()->year }} Booking System PH. Built by Gabriel Cayabyab.
             </div>
         </div>
     </div>

@@ -1,9 +1,9 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-slate-800 border-b border-slate-700 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <!-- Branding -->
             <div class="flex items-center">
-                <a href="{{ route('dashboard') }}" class="text-lg font-bold text-gray-800 hover:text-blue-600">
+                <a href="{{ route('dashboard') }}" class="text-lg font-bold text-white hover:text-slate-400">
                     Booking System
                 </a>
             </div>
@@ -13,7 +13,7 @@
                 <!-- Notifications Dropdown -->
                 <div class="relative" x-data="{ notifOpen: false }">
                     <button @click="notifOpen = !notifOpen" class="relative focus:outline-none">
-                        <svg class="w-6 h-6 text-gray-600 hover:text-blue-600" fill="none" stroke="currentColor"
+                        <svg class="w-6 h-6 text-white hover:text-green-400" fill="none" stroke="currentColor"
                              stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                   d="M15 17h5l-1.405-1.405A2.032 2.032 0 
@@ -33,18 +33,18 @@
 
                     <!-- Dropdown -->
                     <div x-show="notifOpen" @click.away="notifOpen = false"
-                         class="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg z-50 p-3 text-sm text-gray-700">
+                         class="absolute right-0 mt-2 w-64 bg-slate-700 text-white rounded-md shadow-lg z-50 p-3 text-sm">
                         <p class="font-semibold mb-2">Notifications</p>
                         @forelse(auth()->user()->unreadNotifications->take(5) as $notification)
-                            <div class="border-b py-1">
+                            <div class="border-b border-slate-600 py-1">
                                 {{ $notification->data['message'] ?? 'New notification' }}
-                                <div class="text-xs text-gray-400">{{ $notification->created_at->diffForHumans() }}</div>
+                                <div class="text-xs text-slate-400">{{ $notification->created_at->diffForHumans() }}</div>
                             </div>
                         @empty
-                            <p class="text-gray-500">No new notifications</p>
+                            <p class="text-slate-400">No new notifications</p>
                         @endforelse
                         <div class="mt-2 text-right">
-                            <a href="{{ route('notifications.index') }}" class="text-blue-600 text-xs hover:underline">
+                            <a href="{{ route('notifications.index') }}" class="text-green-400 text-xs hover:underline">
                                 View All
                             </a>
                         </div>
@@ -54,7 +54,7 @@
                 <!-- User dropdown -->
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700">
+                        <button class="flex items-center text-sm font-medium text-white hover:text-slate-500">
                             <div>{{ Auth::user()->name }}</div>
                             <div class="ml-1">
                                 <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
@@ -69,14 +69,15 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
+                        <x-dropdown-link :href="route('profile.edit')" class="text-slate-600 hover:bg-slate-400">
                             Profile
                         </x-dropdown-link>
 
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <x-dropdown-link :href="route('logout')"
-                                onclick="event.preventDefault(); this.closest('form').submit();">
+                                onclick="event.preventDefault(); this.closest('form').submit();"
+                                class="text-slate-600 hover:bg-slate-400">
                                 Log Out
                             </x-dropdown-link>
                         </form>

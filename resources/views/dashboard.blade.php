@@ -5,52 +5,53 @@
         </h2>
     </x-slot>
 
-    <div class="flex">
-    @auth
-        @if(auth()->user()->id === 1)
+    <div class="flex bg-slate-900 min-h-screen">
+
+        @auth
+            @if(auth()->user()->id === 1)
                 {{-- Sidebar --}}
-            <div class="w-64 bg-gradient-to-r from-green-500 to-blue-300 text-black p-4">
-                <h3 class="text-lg font-semibold mb-6">Admin Panel</h3>
-                <ul class="space-y-4">
-                    <li>
-                        <a href="{{ route('mybookings.index') }}" class="block p-3 hover:bg-indigo-700 rounded">Manage Bookings</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('users.index') }}" class="block p-3 hover:bg-indigo-700 rounded">Show All Users</a>
-                    </li>
-                </ul>
-            </div>
-        @endif
-    @endauth
+                <div class="w-60- bg-gray-800 text-white p-4 rounded-xl shadow-lg h-auto">
+                    <h3 class="text-lg font-semibold mb-6">Admin Panel</h3>
+                    <ul class="space-y-4">
+                        <li>
+                            <a href="{{ route('mybookings.index') }}" class="block p-3 rounded hover:bg-gray-700 transition">Manage Bookings</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('users.index') }}" class="block p-3 rounded hover:bg-gray-700 transition">Show All Users</a>
+                        </li>
+                    </ul>
+                </div>
+            @endif
+        @endauth
 
         {{-- Main Content --}}
-        <div class="flex-1 p-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="flex-1 p-6 max-w-7xl mx-auto sm:px-6 lg:px-8 text-blue-300">
             {{-- Booking Summary --}}
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
-                <div class="bg-gradient-to-r from-green-500 to-blue-300 shadow rounded p-4 hover:scale-105 transform transition duration-300 ease-in-out">
-                    <div class="text-sm text-black">Total Bookings</div>
-                    <div class="text-2xl font-bold text-black">{{ $stats['total'] }}</div>
+                <div class="bg-gray-800 border-l-4 border-green-600 rounded p-4 shadow hover:scale-105 transition">
+                    <div class="text-sm text-gray-400">Total Bookings</div>
+                    <div class="text-2xl font-bold">{{ $stats['total'] }}</div>
                 </div>
-                <div class="bg-gradient-to-r from-green-500 to-blue-300 shadow rounded p-4 hover:scale-105 transform transition duration-300 ease-in-out">
-                    <div class="text-sm text-black">Upcoming</div>
-                    <div class="text-2xl font-bold text-black">{{ $stats['upcoming'] }}</div>
+                <div class="bg-gray-800 border-l-4 border-blue-500 rounded p-4 shadow hover:scale-105 transition">
+                    <div class="text-sm text-gray-400">Upcoming</div>
+                    <div class="text-2xl font-bold">{{ $stats['upcoming'] }}</div>
                 </div>
-                <div class="bg-gradient-to-r from-green-500 to-blue-300 shadow rounded p-4 hover:scale-105 transform transition duration-300 ease-in-out">
-                    <div class="text-sm text-black">Pending</div>
-                    <div class="text-2xl font-bold text-black">{{ $stats['pending'] }}</div>
+                <div class="bg-gray-800 border-l-4 border-yellow-500 rounded p-4 shadow hover:scale-105 transition">
+                    <div class="text-sm text-gray-400">Pending</div>
+                    <div class="text-2xl font-bold">{{ $stats['pending'] }}</div>
                 </div>
-                <div class="bg-gradient-to-r from-green-500 to-blue-300 shadow rounded p-4 hover:scale-105 transform transition duration-300 ease-in-out">
-                    <div class="text-sm text-black">Completed</div>
-                    <div class="text-2xl font-bold text-black">{{ $stats['completed'] }}</div>
+                <div class="bg-gray-800 border-l-4 border-gray-500 rounded p-4 shadow hover:scale-105 transition">
+                    <div class="text-sm text-gray-400">Completed</div>
+                    <div class="text-2xl font-bold">{{ $stats['completed'] }}</div>
                 </div>
-                <div class="bg-gradient-to-r from-green-500 to-blue-300 shadow rounded p-4 hover:scale-105 transform transition duration-300 ease-in-out">
-                    <div class="text-sm text-black">Total Users</div>
-                    <div class="text-2xl font-bold text-black">{{ $stats['users'] }}</div>
-    </div>
+                <div class="bg-gray-800 border-l-4 border-indigo-500 rounded p-4 shadow hover:scale-105 transition">
+                    <div class="text-sm text-gray-400">Total Users</div>
+                    <div class="text-2xl font-bold">{{ $stats['users'] }}</div>
+                </div>
             </div>
 
             {{-- Calendar --}}
-            <div id="calendar" class="bg-gradient-to-r from-green-500 to-blue-400 text-black p-4 rounded shadow mb-6 hover:shadow-2xl transform transition duration-300 ease-in-out"></div>
+            <div id="calendar" class="bg-gray-800 p-4 rounded shadow mb-6 hover:shadow-xl transition"></div>
         </div>
     </div>
 
@@ -68,7 +69,6 @@
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay'
                 },
-                // Handling the click on a date (for creating a booking)
                 select: function (info) {
                     Swal.fire({
                         title: 'Create a New Booking',
@@ -100,12 +100,12 @@
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",
-                                    "X-CSRF-TOKEN": "{{ csrf_token() }}", // Ensure CSRF is correct
+                                    "X-CSRF-TOKEN": "{{ csrf_token() }}",
                                     "X-Requested-With": "XMLHttpRequest"
                                 },
                                 body: JSON.stringify({
                                     title: result.value.title,
-                                    date: info.startStr,  // Use the selected date from FullCalendar
+                                    date: info.startStr,
                                     time: result.value.time,
                                     duration: result.value.duration,
                                     description: result.value.description
@@ -121,7 +121,6 @@
                             .then(data => {
                                 Swal.fire("Success", "Booking created successfully!", "success");
 
-                                // Add the new booking to FullCalendar
                                 calendar.addEvent({
                                     title: data.booking.title,
                                     start: `${data.booking.date}T${data.booking.time}`,
@@ -135,7 +134,6 @@
                         }
                     });
                 },
-                // Pre-existing events (Bookings) from the database
                 events: [
                     @foreach ($bookings as $booking)
                     {
