@@ -21,7 +21,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($bookings as $booking)
+                    @forelse ($bookings as $booking)
                         <tr class="border-t border-slate-600 hover:bg-slate-700">
                             <td class="text-gray-100 p-3">{{ $booking->title }}</td>
                             <td class="text-gray-100 p-3">{{ $booking->date }}</td>
@@ -29,10 +29,8 @@
                             <td class="text-gray-100 p-3">{{ $booking->duration }} min</td>
                             <td class="text-gray-100 p-3 capitalize">{{ $booking->status }}</td>
                             <td class="text-gray-100 p-3">{{ $booking->user->name ?? '—' }}</td>
-
                             <td class="p-3 flex gap-2">
                                 <a href="{{ route('mybookings.edit', $booking) }}" class="text-blue-400 hover:underline">Edit</a>
-
                                 <form action="{{ route('mybookings.destroy', $booking) }}" method="POST" onsubmit="return confirm('Delete this booking?')" class="inline">
                                     @csrf
                                     @method('DELETE')
@@ -40,14 +38,18 @@
                                 </form>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="7" class="text-center text-slate-400 p-4">No bookings found.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
 
-            {{-- Handle No Bookings --}}
-            @if ($bookings->isEmpty())
-                <p class="text-center text-gray-400 p-4">No bookings found.</p>
-            @endif
+            {{-- Pagination --}}
+            <div class="mt-6 text-center">
+                {{ $bookings->links() }}
+            </div>
         </div>
     </div>
 </x-app-layout>
