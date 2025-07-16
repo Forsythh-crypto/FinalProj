@@ -6,18 +6,22 @@
     </x-slot>
 
     <div class="flex">
-        {{-- Sidebar --}}
-        <div class="w-64 bg-gradient-to-r from-green-500 to-blue-300 text-black p-4">
-            <h3 class="text-lg font-semibold mb-6">Admin Panel</h3>
-            <ul class="space-y-4">
-                <li>
-                    <a href="{{ route('mybookings.index') }}" class="block p-3 hover:bg-indigo-700 rounded">Manage Bookings</a>
-                </li>
-                <li>
-                    <a href="{{ route('users.index') }}" class="block p-3 hover:bg-indigo-700 rounded">Show All Users</a>
-                </li>
-            </ul>
-        </div>
+    @auth
+        @if(auth()->user()->id === 1)
+                {{-- Sidebar --}}
+            <div class="w-64 bg-gradient-to-r from-green-500 to-blue-300 text-black p-4">
+                <h3 class="text-lg font-semibold mb-6">Admin Panel</h3>
+                <ul class="space-y-4">
+                    <li>
+                        <a href="{{ route('mybookings.index') }}" class="block p-3 hover:bg-indigo-700 rounded">Manage Bookings</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('users.index') }}" class="block p-3 hover:bg-indigo-700 rounded">Show All Users</a>
+                    </li>
+                </ul>
+            </div>
+        @endif
+    @endauth
 
         {{-- Main Content --}}
         <div class="flex-1 p-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
