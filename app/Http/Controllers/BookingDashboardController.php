@@ -16,7 +16,8 @@ class BookingDashboardController extends Controller
     public function index()
 {
     // Fetch the bookings
-    $bookings = Booking::all();
+    $bookings = Booking::with('user')->get();
+
 
     // Fetch the total number of users
     $totalUsers = \App\Models\User::count();

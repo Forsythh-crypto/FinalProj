@@ -15,6 +15,7 @@
                     <th class="text-left p-3">Time</th>
                     <th class="text-left p-3">Duration</th>
                     <th class="text-left p-3">Status</th>
+                    <th class="text-left p-3">Created By</th>
                     <th class="text-left p-3">Actions</th>
                 </tr>
             </thead>
@@ -26,6 +27,8 @@
                         <td class="p-3">{{ $booking->time }}</td>
                         <td class="p-3">{{ $booking->duration }} min</td>
                         <td class="p-3 capitalize">{{ $booking->status }}</td>
+                        <td class="p-3">{{ $booking->user->name ?? '—' }}</td>
+
                         <td class="p-3 flex gap-2">
                             {{-- Edit Button --}}
                             <a href="{{ route('mybookings.edit', $booking) }}" class="text-blue-600 hover:underline">Edit</a>
